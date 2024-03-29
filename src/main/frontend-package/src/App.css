@@ -1,0 +1,57 @@
+body{
+    margin:0px;
+}
+#navBar a.active {
+    color: chartreuse;
+}
+
+/* Styles for the dark theme */
+.app-dark {
+    background-color: #1a1818;
+    color: #fffffff3;
+    /* width: 100vw; */
+    min-height: 100vh;
+}
+
+.app-dark h1,
+.app-dark h2,
+.app-dark h3,
+.app-dark h4,
+.app-dark h5,
+.app-dark h6 {
+    color: #ffffffea;
+}
+
+.app-dark a {
+    color: #00bfff;
+}
+
+.app-dark p {
+    color: #cccccc;
+}
+
+.app {
+    background-color: #ffffff;
+    color: #161010;
+    min-height: 100vh;
+}
+
+.app h1,
+.app h2,
+.app h3,
+.app h4,
+.app h5,
+.app h6 {
+    color: #161010;
+    /* Dark text color for headings */
+}
+
+.app a {
+    color: #0000ff;
+    /* Dark blue color for links */
+}
+
+.app p {
+    color: #333333;
+    /* Dark gray color for paragraphs */
+}
