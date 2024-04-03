@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import RestClient from '../service/RestClient';
 
 function User() {
@@ -7,6 +7,13 @@ function User() {
     const [redirectToLogin, setRedirectToLogin] = useState(false);
     const getUserData = async () => {
         const resp = await RestClient.get("/api/user");
+        if(resp.status===403){
+            setData('you are unathorized')
+            return;
+        }else if(resp.status===401){
+            setData(resp.data.error)
+            return;
+        }
         setData(resp.data.data);
     }
     useEffect(() => {

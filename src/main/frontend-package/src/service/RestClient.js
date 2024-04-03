@@ -23,7 +23,7 @@ const RestClient = {
                 let resp = await axiosInstance.get(endpoint, config);
                 return resp;
             } catch (error) {
-                if (error.response?.status === 403) return error.response
+                if (error.response?.status === 403 || error.response?.status === 401) return error.response
                 console.log('Error @ Get in RestClient', error)
 
             }

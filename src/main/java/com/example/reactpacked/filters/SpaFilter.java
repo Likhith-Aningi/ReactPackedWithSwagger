@@ -19,7 +19,7 @@ public class SpaFilter extends OncePerRequestFilter {
         log.info("SpaWebFilter path: " + path);
 
         if (
-            // !path.equals("/") &&
+             !path.equals("/") &&
                 !path.startsWith("/api") &&
                 !path.startsWith("/assets") &&
                 !path.startsWith("/static") &&

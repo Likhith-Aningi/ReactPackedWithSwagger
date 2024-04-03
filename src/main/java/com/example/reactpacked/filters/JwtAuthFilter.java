@@ -1,7 +1,11 @@
 package com.example.reactpacked.filters;
 
-import java.io.IOException;
-
+import com.example.reactpacked.services.InMemoryTokenBlacklist;
+import com.example.reactpacked.services.JwtService;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,13 +16,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.example.reactpacked.services.InMemoryTokenBlacklist;
-import com.example.reactpacked.services.JwtService;
-
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
@@ -40,7 +38,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             try {
                 username = jwtService.extractUsername(token);
             } catch (io.jsonwebtoken.ExpiredJwtException e) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                logger.error("Expired token");
+                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                response.setContentType("application/json");
+                String errorResponse = "{\"error\": \"Token has expired. Please re-authenticate.\"}";
+                response.getWriter().write(errorResponse);
+                return;
             }
         }
         if (token != null && inMemoryTokenBlacklist.isBlacklisted(token)) {

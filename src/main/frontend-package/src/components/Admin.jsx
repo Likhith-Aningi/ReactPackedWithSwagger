@@ -10,6 +10,9 @@ function Admin() {
         if(resp.status===403){
             setData('you are not authroized')
             return;
+        }else if(resp.status===401){
+            setData(resp.data.error)
+            return;
         }
         setData(resp.data.data);
     }

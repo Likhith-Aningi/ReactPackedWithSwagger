@@ -20,10 +20,12 @@ public class JwtService {
 
     public static final String SECRET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ012345";
     final private SecretKey secretKey;
-    final private JwtParser jwtParser; 
-    public JwtService(){
-        this.secretKey=Keys.hmacShaKeyFor(SECRET.getBytes());
-        this.jwtParser = Jwts.parser().verifyWith(this.secretKey).build();;
+    final private JwtParser jwtParser;
+
+    public JwtService() {
+        this.secretKey = Keys.hmacShaKeyFor(SECRET.getBytes());
+        this.jwtParser = Jwts.parser().verifyWith(this.secretKey).build();
+        ;
     }
 
     public String generateToken(String userName) {
@@ -36,12 +38,12 @@ public class JwtService {
                 .claims(claims)
                 .subject(userName)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60*2))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 5))
                 .signWith(secretKey)
                 .compact();
     }
 
-    
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

@@ -19,6 +19,7 @@ public class CustomErrorController implements ErrorController {
             int statusCode = Integer.parseInt(status.toString());
             return switch (statusCode) {
                 case 400 -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body("400 Bad Request");
+                case 401-> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("400 Unauthorized");
                 case 403 -> ResponseEntity.status(HttpStatus.FORBIDDEN).body("403 Forbidden");
                 case 404 -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("404 Not Found");
                 case 405 -> ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body("405 Method Not Allowed");
