@@ -1,5 +1,6 @@
 package com.example.reactpacked.controllers;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
+@Hidden
 public class CustomErrorController implements ErrorController {
     @RequestMapping("/error")
     public ResponseEntity<String> handleError(HttpServletRequest request) {

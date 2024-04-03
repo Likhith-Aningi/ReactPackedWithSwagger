@@ -10,17 +10,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig {
     @Bean
-    GroupedOpenApi groupedOpenApi(){
-        return  GroupedOpenApi.builder()
-                .group("dev-docs")
-                .pathsToMatch("/**")
-                .build();
-    }
-    @Bean
-    OpenAPI customOpenAPI(){
+    OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Sample api title")
+                        .title("Likhith's api definitions")
                         .version("Api version 0.0..")
                         .description("This is reference description using swagger for spring boot rest apis")
                         .contact(new Contact()
@@ -29,5 +22,38 @@ public class SwaggerConfig {
                         )
                         .summary("Summary Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut, ea? Harum dolore reprehenderit nobis eius explicabo repellendus, molestiae dolores! Unde quis necessitatibus obcaecati, aliquam provident explicabo incidunt perferendis fugiat laudantium!")
                 );
+    }
+
+    @Bean
+    GroupedOpenApi groupedOpenApi() {
+        return GroupedOpenApi.builder()
+                .group("dev-docs")
+                .pathsToMatch("/**")
+                .build();
+    }
+
+    @Bean
+    GroupedOpenApi publicGroupedOpenApi() {
+        return GroupedOpenApi.builder()
+                .group("public")
+                .pathsToMatch("/api/**")
+                .pathsToExclude("/api/admin/**", "/api/user/**")
+                .build();
+    }
+
+    @Bean
+    GroupedOpenApi adminGroupedOpenApi() {
+        return GroupedOpenApi.builder()
+                .group("admin")
+                .pathsToMatch("/api/admin/**")
+                .build();
+    }
+
+    @Bean
+    GroupedOpenApi userGroupedOpenApi() {
+        return GroupedOpenApi.builder()
+                .group("user")
+                .pathsToMatch("/api/user/**")
+                .build();
     }
 }
