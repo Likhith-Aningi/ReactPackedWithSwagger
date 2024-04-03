@@ -28,7 +28,7 @@ function App() {
             <NavLink to="/home" style={{ padding: 5 }} >home</NavLink>
             <NavLink to="/user" style={{ padding: 5 }}>User sec</NavLink>
             <NavLink to="/admin" style={{ padding: 5 }}>Admin sec</NavLink>
-            <input type='button' onClick={Logout} value='Logout'/>
+            <Logout/>
           </nav>
         </div>
         <Theme />

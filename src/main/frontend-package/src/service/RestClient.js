@@ -1,7 +1,6 @@
 import axios from 'axios'
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
-    
 })
 axiosInstance.interceptors.request.use(
     config => {
@@ -24,7 +23,7 @@ const RestClient = {
                 let resp = await axiosInstance.get(endpoint, config);
                 return resp;
             } catch (error) {
-                if(error.response?.status===403) return error.response 
+                if (error.response?.status === 403) return error.response
                 console.log('Error @ Get in RestClient', error)
 
             }
@@ -35,7 +34,7 @@ const RestClient = {
                 let resp = await axiosInstance.post(endpoint, body, config);
                 return resp;
             } catch (error) {
-                if(error.response?.status===404&&error.response.config.url==='/api/login') return error.response 
+                if (error.response?.status === 404 && error.response.config.url === '/api/login') return error.response
                 console.log('Error @ Post in RestClient', error)
             }
         },
