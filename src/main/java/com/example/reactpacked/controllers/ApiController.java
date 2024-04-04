@@ -1,6 +1,7 @@
 package com.example.reactpacked.controllers;
 
 import com.example.reactpacked.models.LoginReq;
+import com.example.reactpacked.models.SwaggerPostObj;
 import com.example.reactpacked.services.InMemoryTokenBlacklist;
 import com.example.reactpacked.services.JwtService;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -15,13 +16,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
-
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("*")
 @Slf4j
 public class ApiController {
-    @GetMapping
+    @GetMapping(
+            produces = "application/json"
+    )
     public ObjectNode test() throws InterruptedException {
         Thread.sleep(Duration.ofSeconds(2));
         return JsonNodeFactory.instance.objectNode().put("data", "data from spring boot");
@@ -52,6 +54,14 @@ public class ApiController {
     public ResponseEntity<String> logoutToken(@RequestBody String entity) {
         inMemoryTokenBlacklist.addToBlacklist(entity);
         return ResponseEntity.ok("Logged out successfully");
+    }
+    @GetMapping("/sample-swagger-get")
+    public ResponseEntity<String> swaggerGet(@RequestParam(required = false,defaultValue = "defaultValue") String param1) {
+        return ResponseEntity.ok("Given Param 1 : "+param1);
+    }
+    @PostMapping("/sample-swagger-post")
+    public ResponseEntity<?> swaggerPost(@RequestBody SwaggerPostObj swaggerPostObj) {
+        return ResponseEntity.ok(swaggerPostObj);
     }
 
 }

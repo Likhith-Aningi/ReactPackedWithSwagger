@@ -6,9 +6,12 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 @Configuration
 @SecurityScheme(
@@ -33,6 +36,12 @@ public class SwaggerConfig {
                         )
                         .summary("Summary Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut, ea? Harum dolore reprehenderit nobis eius explicabo repellendus, molestiae dolores! Unde quis necessitatibus obcaecati, aliquam provident explicabo incidunt perferendis fugiat laudantium!")
 
+                ).servers(List.of(
+                                new Server()
+                                        .description("dev-env")
+                                        .url("http://localhost:8081"
+                                        )
+                        )
                 );
     }
 
