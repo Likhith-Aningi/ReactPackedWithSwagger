@@ -1,5 +1,9 @@
 package com.example.reactpacked.config;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
@@ -8,6 +12,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@SecurityScheme(
+        name = "jwtSec",
+        in = SecuritySchemeIn.HEADER,
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer",
+        description = "admin sec description"
+)
 public class SwaggerConfig {
     @Bean
     OpenAPI customOpenAPI() {
@@ -21,6 +33,7 @@ public class SwaggerConfig {
                                 .name("Likhith Aningi")
                         )
                         .summary("Summary Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut, ea? Harum dolore reprehenderit nobis eius explicabo repellendus, molestiae dolores! Unde quis necessitatibus obcaecati, aliquam provident explicabo incidunt perferendis fugiat laudantium!")
+
                 );
     }
 
