@@ -1,9 +1,9 @@
 package com.example.reactpacked.services;
 
+import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import org.springframework.stereotype.Service;
 
 interface TokenBlacklist {
     void addToBlacklist(String token);
