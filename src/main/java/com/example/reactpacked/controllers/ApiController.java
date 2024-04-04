@@ -6,6 +6,8 @@ import com.example.reactpacked.services.InMemoryTokenBlacklist;
 import com.example.reactpacked.services.JwtService;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.models.servers.Server;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("*")
@@ -56,9 +60,17 @@ public class ApiController {
         return ResponseEntity.ok("Logged out successfully");
     }
     @GetMapping("/sample-swagger-get")
+    @Operation(
+            description = "sample swagger get api",
+            tags = "swagger-sample-api"
+    )
     public ResponseEntity<String> swaggerGet(@RequestParam(required = false,defaultValue = "defaultValue") String param1) {
         return ResponseEntity.ok("Given Param 1 : "+param1);
     }
+    @Operation(
+            description = "sample swagger post api",
+            tags = "swagger-sample-api"
+    )
     @PostMapping("/sample-swagger-post")
     public ResponseEntity<?> swaggerPost(@RequestBody SwaggerPostObj swaggerPostObj) {
         return ResponseEntity.ok(swaggerPostObj);
