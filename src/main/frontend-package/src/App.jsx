@@ -1,20 +1,20 @@
-import './App.css'
+import { useState } from 'react';
 import {
+  BrowserRouter,
+  NavLink,
   Route,
   Routes,
-  NavLink,
-  BrowserRouter,
 } from "react-router-dom";
-import Index from './components/Index';
+import './App.css';
+import Admin from './components/Admin';
+import Context from './components/Context';
 import Home from './components/Home';
+import Index from './components/Index';
+import Login from './components/Login';
+import Logout from './components/Logout';
 import NotFound from './components/NotFound';
 import Theme from './components/Theme';
-import Context from './components/Context';
-import Login from './components/Login';
 import User from './components/User';
-import Admin from './components/Admin';
-import Logout from './components/Logout';
-import { useState } from 'react';
 function App() {
   const [mode, setMode] = useState(localStorage.getItem('mode') ?? 'dark');
   const appMode = mode == 'dark' ? 'app-dark' : 'app';
